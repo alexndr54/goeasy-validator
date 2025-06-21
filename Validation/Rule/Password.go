@@ -1,17 +1,17 @@
-package Filter
+package Rule
 
 import (
 	"fmt"
 	"regexp"
 )
 
-// passwordRule implementasi untuk aturan 'password' (contoh kompleks).
-type passwordRule struct{}
+// PasswordRule implementasi untuk aturan 'password' (contoh kompleks).
+type PasswordRule struct{}
 
-func (p *passwordRule) GetName() string                   { return "password" }
-func (p *passwordRule) ParseParams(params []string) error { return nil }
+func (p *PasswordRule) GetName() string                   { return "password" }
+func (p *PasswordRule) ParseParams(params []string) error { return nil }
 
-func (p *passwordRule) Validate(field string, value interface{}) (bool, string) {
+func (p *PasswordRule) Validate(field string, value interface{}) (bool, string) {
 	strValue, ok := value.(string)
 	if !ok {
 		return false, fmt.Sprintf("%s harus berupa string untuk validasi kata sandi.", field)

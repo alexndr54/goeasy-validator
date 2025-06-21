@@ -1,12 +1,5 @@
 package Validation
 
-import (
-	"fmt"
-	"github.com/alexndr54/goeasy-validator/Validation/Helper"
-	"github.com/alexndr54/goeasy-validator/Validation/Model"
-	"strings"
-)
-
 // NewValidator membuat instance Validator baru.
 func NewValidator(data map[string]interface{}, rules map[string]string) *Validator {
 	return &Validator{
@@ -16,15 +9,21 @@ func NewValidator(data map[string]interface{}, rules map[string]string) *Validat
 	}
 }
 
-type ValidationErrors map[string][]string
+func NewSimpleValidator(data map[string]interface{}, rules map[string]string) map[string][]string {
+	validator4 := NewValidator(data, rules)
+	errors4 := validator4.Validate()
 
-func (ve ValidationErrors) Add(field, message string) {
-	ve[field] = append(ve[field], message)
+	if errors4.HasErrors() {
+		dataError := make(map[string][]string)
+		for field, msgs := range errors4 {
+			for _, msgg := range msgs {
+				dataError[field] = append(dataError[field], msgg)
+			}
+		}
+
+		return dataError
+	} else {
+		return nil
+	}
 }
 
-// HasErrors memeriksa apakah ada kesalahan validasi.
-func (ve ValidationErrors) HasErrors() bool {
-	return len(ve) > 0
-}
-
-// Validate menjalankan proses validasi.

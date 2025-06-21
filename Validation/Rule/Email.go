@@ -1,17 +1,17 @@
-package Filter
+package Rule
 
 import (
 	"fmt"
 	"regexp"
 )
 
-// emailRule implementasi untuk aturan 'email'.
-type emailRule struct{}
+// EmailRule implementasi untuk aturan 'email'.
+type EmailRule struct{}
 
-func (e *emailRule) GetName() string                   { return "email" }
-func (e *emailRule) ParseParams(params []string) error { return nil } // Tidak ada parameter
+func (e *EmailRule) GetName() string                   { return "email" }
+func (e *EmailRule) ParseParams(params []string) error { return nil } // Tidak ada parameter
 
-func (e *emailRule) Validate(field string, value interface{}) (bool, string) {
+func (e *EmailRule) Validate(field string, value interface{}) (bool, string) {
 	strValue, ok := value.(string)
 	if !ok {
 		return false, fmt.Sprintf("%s harus berupa string untuk validasi email.", field)

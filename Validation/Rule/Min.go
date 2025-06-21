@@ -1,17 +1,17 @@
-package Filter
+package Rule
 
 import (
 	"fmt"
 	"strconv"
 )
 
-// minRule implementasi untuk aturan 'min'.
-type minRule struct {
+// MinRule implementasi untuk aturan 'min'.
+type MinRule struct {
 	minLength int
 }
 
-func (m *minRule) GetName() string { return "min" }
-func (m *minRule) ParseParams(params []string) error {
+func (m *MinRule) GetName() string { return "min" }
+func (m *MinRule) ParseParams(params []string) error {
 	if len(params) == 0 {
 		return fmt.Errorf("aturan min membutuhkan parameter panjang minimum")
 	}
@@ -23,7 +23,7 @@ func (m *minRule) ParseParams(params []string) error {
 	return nil
 }
 
-func (m *minRule) Validate(field string, value interface{}) (bool, string) {
+func (m *MinRule) Validate(field string, value interface{}) (bool, string) {
 	strValue, ok := value.(string)
 	if !ok {
 		return false, fmt.Sprintf("%s harus berupa string untuk validasi panjang.", field)
