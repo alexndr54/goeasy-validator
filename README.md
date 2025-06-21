@@ -31,7 +31,9 @@ import ("github.com/alexndr54/goeasy-validator/Validation"
 	}
 
 ```
- ```bash
+
+atau
+```bash
 		userData1 := map[string]interface{}{
 			"nama_depan": "Budi",
 			"email":      "budi.santoso@example.com",
@@ -58,3 +60,45 @@ import ("github.com/alexndr54/goeasy-validator/Validation"
 		  fmt.Println("Data pengguna 1 valid.")
 		}
  ```
+
+  3. Rules
+<table>
+<thead>
+<tr>
+<th>Rules</th>
+<th>Contoh Dan Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> require </td>
+<td>map[string]string{ "nama": "required" }, Wajib di isi</td>
+</tr>
+
+<tr>
+<td> min:int </td>
+<td>map[string]string{ "nama": "min:5" }, Ubah angka 5 dengan jumlah minimum</td>
+</tr>
+
+<tr>
+<td> max:int </td>
+<td>map[string]string{ "nama": "max:10" }, Ubah angka 10 dengan jumlah maksimal</td>
+</tr>
+
+<tr>
+<td> only_letters </td>
+<td>map[string]string{ "nama": "only_letters" }, Hanya boleh huruf besar & kecil</td>
+</tr>
+
+<tr>
+<td> password </td>
+<td>map[string]string{ "nama": "password" }, Yang di input wajib minimal 8 huruf dan mengandung huruf kecil, huruf besar, dan angka</td>
+</tr>
+
+
+<tr>
+<td> email </td>
+<td>map[string]string{ "nama": "email" }, Yang di input harus dalam format email</td>
+</tr>
+</tbody>
+</table>
