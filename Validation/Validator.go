@@ -24,7 +24,7 @@ func (v *Validator) Validate() ValidationErrors {
 			rule, err := Helper.NewRuleFromSpec(ruleSpec)
 			if err != nil {
 				// Handle error parsing rule, mungkin tambahkan ke errors atau log
-				v.Errors.Add(field, fmt.Sprintf("Kesalahan internal: %v", err))
+				v.Errors.Add(field, fmt.Sprintf("Kesalahan internal: %v", err.Error()))
 				continue
 			}
 

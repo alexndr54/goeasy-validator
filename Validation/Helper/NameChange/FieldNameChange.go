@@ -1,4 +1,4 @@
-package Helper
+package NameChange
 
 import "strings"
 

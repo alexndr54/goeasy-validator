@@ -9,16 +9,15 @@ func NewValidator(data map[string]interface{}, rules map[string]string) *Validat
 	}
 }
 
-func NewSimpleValidator(data map[string]interface{}, rules map[string]string) map[string][]string {
+// NewSimpleValidator membuat instance Validator sederhana yang mengembalikan kesalahan sebagai map,Example: map[Username: Wajib di isi,Email: Format email]
+func NewSimpleValidator(data map[string]interface{}, rules map[string]string) map[string]string {
 	validator4 := NewValidator(data, rules)
 	errors4 := validator4.Validate()
 
 	if errors4.HasErrors() {
-		dataError := make(map[string][]string)
+		dataError := make(map[string]string)
 		for field, msgs := range errors4 {
-			for _, msgg := range msgs {
-				dataError[field] = append(dataError[field], msgg)
-			}
+			dataError[field] = msgs[0]
 		}
 
 		return dataError
@@ -27,3 +26,16 @@ func NewSimpleValidator(data map[string]interface{}, rules map[string]string) ma
 	}
 }
 
+// NewSingleRuleValidator memvalidasi semua aturan tetapi hanya mengembalikan 1 kesalahan (type string/field,type string/mesasge) (nama_lengkap: require,Wajib di isi)
+func NewSingleRuleValidator(data map[string]interface{}, rules map[string]string) (string, string) {
+	validator4 := NewValidator(data, rules)
+	errors4 := validator4.Validate()
+
+	if errors4.HasErrors() {
+		for field, msgs := range errors4 {
+			return field, msgs[0]
+		}
+	}
+
+	return "", "" // Jika tidak ada kesalahan, kembalikan string kosong
+}

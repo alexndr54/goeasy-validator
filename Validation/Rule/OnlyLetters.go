@@ -2,6 +2,7 @@ package Rule
 
 import (
 	"fmt"
+	"github.com/alexndr54/goeasy-validator/Validation/Helper/NameChange"
 	"regexp"
 )
 
@@ -16,6 +17,7 @@ func (m *OnlyLetters) ParseParams(params []string) error {
 }
 
 func (m *OnlyLetters) Validate(field string, value interface{}) (bool, string) {
+	field = NameChange.FieldNameChange(field)
 	strValue, ok := value.(string)
 
 	if !ok {

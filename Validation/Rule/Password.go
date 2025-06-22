@@ -2,6 +2,7 @@ package Rule
 
 import (
 	"fmt"
+	"github.com/alexndr54/goeasy-validator/Validation/Helper/NameChange"
 	"regexp"
 )
 
@@ -12,6 +13,7 @@ func (p *PasswordRule) GetName() string                   { return "password" }
 func (p *PasswordRule) ParseParams(params []string) error { return nil }
 
 func (p *PasswordRule) Validate(field string, value interface{}) (bool, string) {
+	field = NameChange.FieldNameChange(field)
 	strValue, ok := value.(string)
 	if !ok {
 		return false, fmt.Sprintf("%s harus berupa string untuk validasi kata sandi.", field)

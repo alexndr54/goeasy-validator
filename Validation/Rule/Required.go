@@ -2,6 +2,7 @@ package Rule
 
 import (
 	"fmt"
+	"github.com/alexndr54/goeasy-validator/Validation/Helper/NameChange"
 	"reflect"
 	"strings"
 )
@@ -12,6 +13,7 @@ func (r *RequiredRule) GetName() string                   { return "required" }
 func (r *RequiredRule) ParseParams(params []string) error { return nil } // Tidak ada parameter
 
 func (r *RequiredRule) Validate(field string, value interface{}) (bool, string) {
+	field = NameChange.FieldNameChange(field)
 	if value == nil {
 		return false, fmt.Sprintf("%s tidak boleh kosong.", field)
 	}

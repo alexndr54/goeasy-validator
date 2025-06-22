@@ -2,6 +2,7 @@ package Rule
 
 import (
 	"fmt"
+	"github.com/alexndr54/goeasy-validator/Validation/Helper/NameChange"
 	"strconv"
 )
 
@@ -25,6 +26,7 @@ func (m *MaxRule) ParseParams(params []string) error {
 }
 
 func (m *MaxRule) Validate(field string, value interface{}) (bool, string) {
+	field = NameChange.FieldNameChange(field)
 	strValue, ok := value.(string)
 	if !ok {
 		return false, fmt.Sprintf("%s harus berupa string untuk validasi panjang.", field)

@@ -50,16 +50,39 @@ atau
 		errors1 := validator1.Validate()
 
 		if errors1.HasErrors() {
-			fmt.Println("Kesalahan validasi:")
 			for field, msgs := range errors1 {
 				for _, msg := range msgs {
-					t.Errorf("- %s: %s\n", field, msg)
+				  fmt.Println("Field:", field);
+				  fmt.Println("Pesan Error:", msg);
 				}
 			}
 		} else {
 		  fmt.Println("Data pengguna 1 valid.")
 		}
  ```
+
+atau
+
+```bash
+    data := map[string]interface{}{
+		"nama_lengkap":  "awgfjjedugfjeJLGF",
+		"nama_lengkap2": "sad",
+	}
+	rules := map[string]string{
+		"nama_lengkap":  "required|password|min:5",
+		"nama_lengkap2": "required|password|min:5",
+	}
+
+	simple := Validation.NewSimpleValidator(data, rules)
+	field, msg := Validation.NewSingleRuleValidator(data, rules)
+
+	fmt.Println(simple)
+	#Output: map[nama_lengkap:[Kata sandi harus mengandung setidaknya satu huruf besar, satu huruf kecil, dan satu angka.] nama_lengkap2:[Kata sandi harus mengandung setidaknya satu huruf besar, satu huruf kecil, dan satu angka.]]
+	fmt.Println(field, msg)
+	#Output: nama_lengkap Kata sandi harus mengandung setidaknya satu huruf besar, satu huruf kecil, dan satu angka.
+
+
+```
 
   3. Rules
 <table>
