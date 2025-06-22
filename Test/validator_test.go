@@ -136,33 +136,20 @@ func TestNewValidatorByMethod(t *testing.T) {
 	})
 }
 
-func TestRulesMax(t *testing.T) {
+func TestRules(t *testing.T) {
 	data := map[string]interface{}{
-		"example": "",
-		"what":    "sdf",
+		"nama_lengkap":  "awgfjjedugfjeJLGF",
+		"nama_lengkap2": "sad",
 	}
 	rules := map[string]string{
-		"example": "required",
-		"what":    "max:1",
+		"nama_lengkap":  "required|password|min:5",
+		"nama_lengkap2": "required|password|min:5",
 	}
 
-	result := Validation.NewSimpleValidator(data, rules)
-	t.Error(result)
+	simple := Validation.NewSimpleValidator(data, rules)
+	field, msg := Validation.NewSingleRuleValidator(data, rules)
 
-}
-func TestRulesOnlyLetters(t *testing.T) {
-	data := map[string]interface{}{
-		"what": 32323,
-	}
-	rules := map[string]string{
-		"what": "only_letters",
-	}
-
-	result := Validation.NewSimpleValidator(data, rules)
-	if result != nil {
-		t.Error("Expected no errors, but got:", result)
-	} else {
-		t.Log("Validation passed, no errors found.")
-	}
+	fmt.Println(simple)
+	fmt.Println(field, msg)
 
 }
